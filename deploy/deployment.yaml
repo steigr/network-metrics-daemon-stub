@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: network-metrics-daemon
+spec:
+  selector:
+    matchLabels:
+      app: network-metrics-daemon
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: network-metrics-daemon
+    spec:
+      serviceAccountName: network-metrics-daemon
+      containers:
+        - name: network-metrics-daemon
+          image: quay.io/steigr/network-metrics-daemon-stub:v1
+          ports:
+            - containerPort: 9091
+              name: metrics

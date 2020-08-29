@@ -1,0 +1,14 @@
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: network-metrics-daemon
+  labels:
+    app: network-metrics-daemon
+subjects:
+  - kind: ServiceAccount
+    name: network-metrics-daemon
+    namespace: $NAMESPACE
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: network-metrics-daemon

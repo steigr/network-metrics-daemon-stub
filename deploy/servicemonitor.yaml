@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: network-metrics-daemon
+  labels:
+    app: network-metrics-daemon
+spec:
+  endpoints:
+    - honorLabels: true
+      metricRelabelings:
+        - sourceLabels:
+            - source_pod
+          targetLabel: pod
+        - sourceLabels:
+            - source_namespace
+          targetLabel: namespace
+      port: metrics
+  selector:
+    matchLabels:
+      app: network-metrics-daemon
